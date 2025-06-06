@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kairos - Save money moving your car</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .autocomplete-item {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .autocomplete-item:hover {
+            background-color: #f9fafb;
+        }
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+        .autocomplete-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif;" class="font-sans">
+    <!-- Navigation -->
+    <nav class="bg-gray-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <h1 class="text-2xl font-bold text-blue-600">Kairos</h1>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+                        <a href="#" class="text-gray-800 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">Browse trips</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">Driver hub</a>
+                        <a href="#" class="text-gray-500 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium">How it works</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="#post-form" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Post your trip</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-blue-50">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h2 class="text-4xl font-extrabold text-gray-800 sm:text-5xl sm:tracking-tight lg:text-6xl">Save money moving your car</h2>
+                <p class="mt-5 text-xl text-gray-500">Connect with drivers who are already heading to your destination. Get better rates and track your vehicle's journey in real-time.</p>
+                <div class="mt-8 flex flex-col sm:flex-row">
+                    <div class="rounded-md shadow">
+                        <a href="#post-form" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                            Post your car
+                        </a>
+                    </div>
+                    <div class="mt-3 sm:mt-0 sm:ml-3">
+                        <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-800 bg-green-200 hover:bg-green-300 md:py-4 md:text-lg md:px-10">
+                            Become a driver
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img class="h-72 object-cover rounded-lg shadow-xl" src="/api/placeholder/600/400" alt="Car transport">
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-800 sm:text-4xl">How Kairos works</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                    Simple, transparent, and affordable car transportation
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <div class="bg-gray-50 rounded-lg p-6 text-center">
+                        <div class="text-5xl text-blue-500 mb-4 flex justify-center">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-800">1. Post your car</h3>
+                        <p class="mt-4 text-gray-500">Enter your vehicle details, route, and when you need it transported.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6 text-center">
+                        <div class="text-5xl text-blue-500 mb-4 flex justify-center">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-800">2. Choose a driver</h3>
+                        <p class="mt-4 text-gray-500">Select from drivers, including those open to verification checks.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-6 text-center">
+                        <div class="text-5xl text-blue-500 mb-4 flex justify-center">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-gray-800">3. Track & receive</h3>
+                        <p class="mt-4 text-gray-500">Follow your car's journey with real-time updates from your driver.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post a Trip Form -->
+    <div id="post-form" class="bg-blue-600">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="bg-gray-50 shadow rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 text-center mb-8">Post your trip</h3>
+                    <form id="trip-form">
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <!-- Pickup Location with Autocomplete -->
+                            <div class="autocomplete-container">
+                                <label for="pickup" class="block text-sm font-medium text-gray-700">Pickup location *</label>
+                                <div class="mt-1">
+                                    <input type="text" name="pickup" id="pickup" required 
+                                           class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border" 
+                                           placeholder="Start typing city, state..."
+                                           autocomplete="off">
+                                    <div id="pickup-dropdown" class="autocomplete-dropdown hidden"></div>
+                                </div>
+                            </div>
+
+                            <!-- Destination with Autocomplete -->
+                            <div class="autocomplete-container">
+                                <label for="destination" class="block text-sm font-medium text-gray-700">Destination *</label>
+                                <div class="mt-1">
+                                    <input type="text" name="destination" id="destination" required 
+                                           class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border" 
+                                           placeholder="Start typing city, state..."
+                                           autocomplete="off">
+                                    <div id="destination-dropdown" class="autocomplete-dropdown hidden"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="vehicle" class="block text-sm font-medium text-gray-700">Vehicle type</label>
+                                <div class="mt-1">
+                                    <select id="vehicle" name="vehicle" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border">
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Truck">Truck</option>
+                                        <option value="Van">Van</option>
+                                        <option value="Luxury/Sports car">Luxury/Sports car</option>
+                                        <option value="Motorcycle">Motorcycle</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Enhanced Date Field -->
+                            <div>
+                                <label for="date" class="block text-sm font-medium text-gray-700">Preferred date</label>
+                                <div class="mt-1">
+                                    <input type="date" name="date" id="date" 
+                                           class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border">
+                                    <p class="mt-1 text-xs text-gray-500">Select a future date</p>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="datesFlexible" id="datesFlexible" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                                        <span class="ml-2 text-sm text-gray-700">Dates flexible (±3 days)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="suggestedPrice" class="block text-sm font-medium text-gray-700">Suggested compensation</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">$</span>
+                                    </div>
+                                    <input type="number" name="suggestedPrice" id="suggestedPrice" min="0" step="0.01"
+                                           class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md p-2 border" 
+                                           placeholder="0.00">
+                                </div>
+                                <p class="mt-1 text-sm text-gray-500">This is a suggested amount. You'll arrange final payment details directly with your driver.</p>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email address *</label>
+                                <div class="mt-1">
+                                    <input id="email" name="email" type="email" autocomplete="email" required 
+                                           class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border">
+                                </div>
+                                <p class="mt-1 text-sm text-gray-500">We'll send you an edit link so you can update your posting anytime.</p>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="notes" class="block text-sm font-medium text-gray-700">Additional notes</label>
+                                <div class="mt-1">
+                                    <textarea id="notes" name="notes" rows="3" maxlength="500"
+                                              class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md p-2" 
+                                              placeholder="Special requirements, car details, timing preferences, etc."></textarea>
+                                    <p class="mt-1 text-xs text-gray-500"><span id="char-count">0</span>/500 characters</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" id="submit-btn" class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <span id="btn-text">Post your trip</span>
+                                <div id="loading" class="hidden ml-2">
+                                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message (Hidden by default) -->
+    <div id="success-message" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <i class="fas fa-check text-green-600 text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mt-4">Trip Posted Successfully!</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Your trip has been posted and drivers can now see it. 
+                        <strong>Check your email</strong> for a link to edit or manage your posting.
+                    </p>
+                    <p class="text-sm text-gray-500 mt-2">
+                        We'll notify you when drivers show interest in your trip.
+                    </p>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="close-success" class="px-4 py-2 bg-blue-600 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700">
+                        Got it!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-800">Why choose Kairos</h2>
+            </div>
+            <div class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-50 text-white mx-auto">
+                        <i class="fas fa-shield-alt text-blue-500"></i>
+                    </div>
+                    <h3 class="mt-5 text-lg font-medium text-gray-800">Driver verification</h3>
+                    <p class="mt-2 text-base text-gray-500">Search for drivers who are "open to verification" for extra peace of mind</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-50 text-white mx-auto">
+                        <i class="fas fa-file-alt text-blue-500"></i>
+                    </div>
+                    <h3 class="mt-5 text-lg font-medium text-gray-800">Safety checklists</h3>
+                    <p class="mt-2 text-base text-gray-500">Access our pre-trip checklists to ensure a smooth and protected transaction</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-50 text-white mx-auto">
+                        <i class="fas fa-star text-blue-500"></i>
+                    </div>
+                    <h3 class="mt-5 text-lg font-medium text-gray-800">Ratings & reviews</h3>
+                    <p class="mt-2 text-base text-gray-500">Choose drivers based on community ratings and detailed reviews</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-50 text-white mx-auto">
+                        <i class="fas fa-map-marked-alt text-blue-500"></i>
+                    </div>
+                    <h3 class="mt-5 text-lg font-medium text-gray-800">Stay in the loop</h3>
+                    <p class="mt-2 text-base text-gray-500">Unlike traditional towing services, you can directly message your driver and stay updated</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="bg-gray-50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-800">Frequently asked questions</h2>
+            </div>
+            <div class="mt-10 max-w-3xl mx-auto">
+                <div class="bg-gray-50 shadow overflow-hidden sm:rounded-md">
+                    <ul class="divide-y divide-gray-200">
+                        <li>
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-800">How do I edit my posting after submitting?</h3>
+                                <p class="mt-1 text-sm text-gray-500">After posting your trip, you'll receive an email with a secure edit link. Use this link to update your posting details, pricing, or cancel the trip anytime.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-800">How do payments work?</h3>
+                                <p class="mt-1 text-sm text-gray-500">Kairos connects car owners and drivers, but payment arrangements are made directly between both parties. We provide guidelines on fair pricing and secure payment methods.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-800">What about insurance?</h3>
+                                <p class="mt-1 text-sm text-gray-500">Both drivers and car owners should ensure they have appropriate insurance coverage. We provide comprehensive guidelines and pre-trip checklists to help verify coverage before any trip begins.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-800">How much should I pay or charge?</h3>
+                                <p class="mt-1 text-sm text-gray-500">Pricing depends on distance, vehicle type, and timeline. We provide suggestions based on similar routes to help you set fair compensation.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="px-4 py-5 sm:px-6">
+                                <h3 class="text-lg font-medium text-gray-800">How are drivers vetted?</h3>
+                                <p class="mt-1 text-sm text-gray-500">We provide a community rating system and "open to verification" badges for drivers willing to undergo additional checks. Our guidelines also help car owners conduct their own verification steps.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-blue-600">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                <span class="block">Ready to save on car transport?</span>
+                <span class="block text-blue-100">Get started in just a few minutes.</span>
+            </h2>
+            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow">
+                    <a href="#post-form" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-gray-50 hover:bg-blue-50">
+                        Post your trip
+                    </a>
+                </div>
+                <div class="ml-3 inline-flex rounded-md shadow">
+                    <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-800 hover:bg-blue-900">
+                        Learn more
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">About</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Our story</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">How it works</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Careers</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Support</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Contact us</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Safety guidelines</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Safety checklists</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Terms</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Connect</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Newsletter</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-base text-gray-300 hover:text-white">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">&copy; 2025 Kairos. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // City/State data - Top 500 US cities
+        const cities = [
+            "New York, NY", "Los Angeles, CA", "Chicago, IL", "Houston, TX", "Phoenix, AZ",
+            "Philadelphia, PA", "San Antonio, TX", "San Diego, CA", "Dallas, TX", "San Jose, CA",
+            "Austin, TX", "Jacksonville, FL", "Fort Worth, TX", "Columbus, OH", "Charlotte, NC",
+            "San Francisco, CA", "Indianapolis, IN", "Seattle, WA", "Denver, CO", "Washington, DC",
+            "Boston, MA", "El Paso, TX", "Nashville, TN", "Detroit, MI", "Oklahoma City, OK",
+            "Portland, OR", "Las Vegas, NV", "Memphis, TN", "Louisville, KY", "Baltimore, MD",
+            "Milwaukee, WI", "Albuquerque, NM", "Tucson, AZ", "Fresno, CA", "Sacramento, CA",
+            "Mesa, AZ", "Kansas City, MO", "Atlanta, GA", "Long Beach, CA", "Colorado Springs, CO",
+            "Raleigh, NC", "Miami, FL", "Virginia Beach, VA", "Omaha, NE", "Oakland, CA",
+            "Minneapolis, MN", "Tulsa, OK", "Arlington, TX", "Tampa, FL", "New Orleans, LA",
+            "Wichita, KS", "Cleveland, OH", "Bakersfield, CA", "Aurora, CO", "Anaheim, CA",
+            "Honolulu, HI", "Santa Ana, CA", "Riverside, CA", "Corpus Christi, TX", "Lexington, KY",
+            "Stockton, CA", "Henderson, NV", "Saint Paul, MN", "St. Louis, MO", "Cincinnati, OH",
+            "Pittsburgh, PA", "Greensboro, NC", "Anchorage, AK", "Plano, TX", "Lincoln, NE",
+            "Orlando, FL", "Irvine, CA", "Newark, NJ", "Durham, NC", "Chula Vista, CA",
+            "Toledo, OH", "Fort Wayne, IN", "St. Petersburg, FL", "Laredo, TX", "Jersey City, NJ",
+            "Chandler, AZ", "Madison, WI", "Lubbock, TX", "Scottsdale, AZ", "Reno, NV",
+            "Buffalo, NY", "Gilbert, AZ", "Glendale, AZ", "North Las Vegas, NV", "Winston-Salem, NC",
+            "Chesapeake, VA", "Norfolk, VA", "Fremont, CA", "Garland, TX", "Irving, TX",
+            "Hialeah, FL", "Richmond, VA", "Boise, ID", "Spokane, WA", "Baton Rouge, LA"
+            // Add more cities as needed...
+        ];
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+
+        // Character counter for notes
+        const notesField = document.getElementById('notes');
+        const charCount = document.getElementById('char-count');
+        
+        notesField.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+
+        // Autocomplete functionality
+        function setupAutocomplete(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            let selectedIndex = -1;
+
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                if (value.length < 2) {
+                    dropdown.classList.add('hidden');
+                    return;
+                }
+
+                // Filter cities
+                const filtered = cities.filter(city => 
+                    city.toLowerCase().includes(value)
+                ).slice(0, 8); // Show max 8 results
+
+                if (filtered.length === 0) {
+                    dropdown.classList.add('hidden');
+                    return;
+                }
+
+                // Populate dropdown
+                dropdown.innerHTML = filtered.map((city, index) => 
+                    `<div class="autocomplete-item" data-value="${city}" data-index="${index}">${city}</div>`
+                ).join('');
+
+                dropdown.classList.remove('hidden');
+                selectedIndex = -1;
+            });
+
+            // Handle keyboard navigation
+            input.addEventListener('keydown', function(e) {
+                const items = dropdown.querySelectorAll('.autocomplete-item');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                    updateSelection(items);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    selectedIndex = Math.max(selectedIndex - 1, -1);
+                    updateSelection(items);
+                } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                    e.preventDefault();
+                    selectItem(items[selectedIndex]);
+                } else if (e.key === 'Escape') {
+                    dropdown.classList.add('hidden');
+                    selectedIndex = -1;
+                }
+            });
+
+            // Handle mouse clicks
+            dropdown.addEventListener('click', function(e) {
+                if (e.target.classList.contains('autocomplete-item')) {
+                    selectItem(e.target);
+                }
+            });
+
+            function updateSelection(items) {
+                items.forEach((item, index) => {
+                    if (index === selectedIndex) {
+                        item.style.backgroundColor = '#eff6ff';
+                    } else {
+                        item.style.backgroundColor = '';
+                    }
+                });
+            }
+
+            function selectItem(item) {
+                input.value = item.dataset.value;
+                dropdown.classList.add('hidden');
+                selectedIndex = -1;
+            }
+
+            // Hide dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        // Setup autocomplete for both fields
+        setupAutocomplete('pickup', 'pickup-dropdown');
+        setupAutocomplete('destination', 'destination-dropdown');
+
+        // Enhanced form validation
+        document.getElementById('trip-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const tripData = {};
+            for (let [key, value] of formData.entries()) {
+                tripData[key] = value;
+            }
+            
+            // Enhanced validation
+            if (!tripData.pickup || !tripData.destination || !tripData.email) {
+                alert('Please fill out all required fields (marked with *)');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(tripData.email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Validate date is in future
+            if (tripData.date) {
+                const selectedDate = new Date(tripData.date);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (selectedDate < today) {
+                    alert('Please select a future date');
+                    return;
+                }
+            }
+
+            // Validate pickup and destination are different
+            if (tripData.pickup.toLowerCase() === tripData.destination.toLowerCase()) {
+                alert('Pickup and destination cities must be different');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const loading = document.getElementById('loading');
+            
+            submitBtn.disabled = true;
+            btnText.textContent = 'Posting...';
+            loading.classList.remove('hidden');
+            
+            // Simulate API call (replace with real API later)
+            setTimeout(() => {
+                // Generate unique trip ID and edit token
+                const tripId = 'trip_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                const editToken = Math.random().toString(36).substr(2, 15);
+                
+                console.log('Trip posted:', {
+                    id: tripId,
+                    editToken: editToken,
+                    ...tripData,
+                    createdAt: new Date().toISOString(),
+                    status: 'active'
+                });
+                
+                // Reset button
+                submitBtn.disabled = false;
+                btnText.textContent = 'Post your trip';
+                loading.classList.add('hidden');
+                
+                // Show success message
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Clear form
+                document.getElementById('trip-form').reset();
+                charCount.textContent = '0';
+                
+            }, 2000);
+        });
+
+        // Close success message
+        document.getElementById('close-success').addEventListener('click', function() {
+            document.getElementById('success-message').classList.add('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

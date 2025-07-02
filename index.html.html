@@ -614,33 +614,41 @@
             btnText.textContent = 'Posting...';
             loading.classList.remove('hidden');
             
-            // Simulate API call (replace with real API later)
-            setTimeout(() => {
-                // Generate unique trip ID and edit token
-                const tripId = 'trip_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                const editToken = Math.random().toString(36).substr(2, 15);
-                
-                console.log('Trip posted:', {
-                    id: tripId,
-                    editToken: editToken,
-                    ...tripData,
-                    createdAt: new Date().toISOString(),
-                    status: 'active'
-                });
-                
-                // Reset button
-                submitBtn.disabled = false;
-                btnText.textContent = 'Post your trip';
-                loading.classList.add('hidden');
-                
-                // Show success message
-                document.getElementById('success-message').classList.remove('hidden');
-                
-                // Clear form
-                document.getElementById('trip-form').reset();
-                charCount.textContent = '0';
-                
-            }, 2000);
+            // Real API call to backend
+try {
+    const response = await fetch('https://kairos-backend-indol.vercel.app/api/trips', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(tripData)
+    });
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+        throw new Error(result.error || 'Failed to post trip');
+    }
+    
+    // Success!
+    console.log('Trip posted successfully:', result);
+    
+    // Show success message
+    document.getElementById('success-message').classList.remove('hidden');
+    
+    // Clear form
+    document.getElementById('trip-form').reset();
+    charCount.textContent = '0';
+    
+} catch (error) {
+    console.error('Error posting trip:', error);
+    alert('Sorry, there was an error posting your trip. Please try again.');
+} finally {
+    // Reset button
+    submitBtn.disabled = false;
+    btnText.textContent = 'Post your trip';
+    loading.classList.add('hidden');
+}
         });
 
         // Close success message

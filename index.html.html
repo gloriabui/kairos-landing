@@ -564,7 +564,7 @@
         setupAutocomplete('destination', 'destination-dropdown');
 
         // Enhanced form validation
-        document.getElementById('trip-form').addEventListener('submit', function(e) {
+        document.getElementById('trip-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form data

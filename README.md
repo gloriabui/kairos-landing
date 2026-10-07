@@ -1,4 +1,4 @@
-# Kairos — One-Way Car Marketplace
+# Ridepair — One-Way Car Marketplace
 
 A concept marketplace connecting car owners who need to relocate 
 a vehicle with drivers who need a one-way car.
@@ -6,12 +6,12 @@ a vehicle with drivers who need a one-way car.
 Live at [kairos-landing-seven.vercel.app](https://kairos-landing-seven.vercel.app)
 
 ## The Problem
-Car owners relocating vehicles pay hundreds in transport fees. 
+Car owners relocating vehicles pay hundreds, even thousands, in transport fees. 
 Travelers needing one-way transportation pay rental premiums. 
 Neither party knows the other exists.
 
 ## The Idea
-Kairos matches supply and demand that's already there — owners 
+Ridepair matches supply and demand that's already there — owners 
 post routes and dates, drivers claim them. Both sides win.
 
 ## Status
